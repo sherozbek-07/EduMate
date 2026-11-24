@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EduMate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE: calm, practical teacher's tool; quick to use between lessons
+   IDEA: a school notebook checked with a red pen
+   PICTURE: lined notebook page with red corrections and a circled grade
+   COLOUR and TYPE: paper white, school-ink blue #1f3a93, red pen #d62f2f; Manrope + Caveat for handwriting
+   LAYOUT: phone app: header, one working column, bottom tab bar */
+:root{color-scheme:light dark;--bg:light-dark(#f6f7fb,#0e1220);--card:light-dark(#fff,#171c2e);--ink:light-dark(#141a2e,#e9ecf7);--mut:light-dark(#5c6480,#9aa3c0);--line:light-dark(#dfe3ef,#2a3150);--blue:light-dark(#1f3a93,#7d9bff);--blueBg:light-dark(#e8edfb,#1d2747);--red:#d62f2f;--redBg:light-dark(#fdecec,#3a1a1f);--ok:light-dark(#137a43,#4fd18b)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Manrope,system-ui,sans-serif;overflow-x:clip;padding-bottom:84px}
+header{background:var(--blue);color:#fff;padding:16px max(4vw,16px) 18px;display:flex;align-items:center;gap:10px}
+header h1{margin:0;font-size:22px;font-weight:800;letter-spacing:-.01em}
+header .hand{font-family:Caveat,cursive;font-size:22px;opacity:.85;margin-left:auto}
+:root:not([data-theme=light]) header{background:light-dark(#1f3a93,#16234d)}
+main{max-width:720px;margin:0 auto;padding:16px max(4vw,14px)}
+h2{font-size:24px;line-height:1.15;margin:8px 0 12px}
+h3{font-size:17px;margin:0 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.mut{color:var(--mut);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+.stat b{display:block;font-size:clamp(22px,6vw,30px);line-height:1.1;color:var(--blue)}
+.stat span{font-size:13px;color:var(--mut)}
+.hero{display:grid;gap:14px}
+.hero svg{width:100%;height:auto;display:block;border-radius:16px}
+button,.btn{font:600 16px Manrope,system-ui,sans-serif;min-height:46px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:10px 16px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+button.pri{background:var(--red);border-color:var(--red);color:#fff}
+button.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1 1 140px}
+label{display:block;font-weight:600;font-size:14px;margin:10px 0 4px}
+input,select,textarea{width:100%;font:16px Manrope,system-ui,sans-serif;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+textarea{min-height:110px;resize:vertical}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--blueBg);border-radius:12px;padding:4px;gap:4px;margin-bottom:6px}
+.seg button{border:0;background:transparent;min-height:40px}
+.seg button.on{background:var(--card);color:var(--blue);box-shadow:0 1px 3px #0002}
+.thumbs{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.thumbs div{position:relative;width:72px;height:92px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.thumbs button{position:absolute;top:2px;right:2px;min-height:26px;width:26px;padding:0;border-radius:50%;font-size:14px;background:#000a;color:#fff;border:0}
+.res{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:start}
+.grade{width:68px;height:68px;border:3px solid var(--red);border-radius:50%;display:grid;place-items:center;font:700 40px Caveat,cursive;color:var(--red);transform:rotate(-8deg)}
+.err{display:flex;gap:8px;align-items:center;padding:8px 0;border-top:1px dashed var(--line);font-size:15px}
+.err .w{color:var(--red);text-decoration:line-through}
+.err .c{color:var(--ok);font-weight:600}
+.err .t{font-size:12px;background:var(--blueBg);color:var(--blue);padding:2px 8px;border-radius:99px;white-space:nowrap}
+.err .x{margin-left:auto;min-height:34px;padding:4px 10px;font-size:13px}
+.err .why{flex-basis:100%;font-size:13px;color:var(--mut)}
+.err{flex-wrap:wrap}
+.tr{font-family:Caveat,cursive;font-size:22px;line-height:1.35;background:repeating-linear-gradient(transparent 0 28.7px,var(--line) 28.7px 29.7px);padding:2px 4px;white-space:pre-wrap;overflow-wrap:anywhere}
+.tr mark{background:none;color:var(--red);text-decoration:underline wavy var(--red);text-underline-offset:4px}
+details summary{cursor:pointer;color:var(--blue);font-weight:600;padding:6px 0}
+.list .it{display:flex;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);cursor:pointer}
+.list .it:first-child{border-top:0}
+.list .g{font:700 26px Caveat,cursive;color:var(--red);width:34px;text-align:center}
+.list .n{flex:1}.list .n small{display:block;color:var(--mut);font-size:13px}
+.note{background:var(--redBg);border-radius:12px;padding:10px 12px;font-size:14px;margin:10px 0}
+.okmsg{background:var(--blueBg);border-radius:12px;padding:10px 12px;font-size:14px;margin:10px 0}
+.prog{height:8px;background:var(--blueBg);border-radius:99px;overflow:hidden;margin:10px 0}
+.prog i{display:block;height:100%;background:var(--red);width:0;transition:width .4s}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+nav button{border:0;background:none;flex-direction:column;gap:2px;font-size:12px;min-height:56px;color:var(--mut);padding:4px}
+nav button svg{width:24px;height:24px}
+nav button.on{color:var(--blue)}
+.steps{display:grid;gap:10px;counter-reset:s}
+.steps div{display:flex;gap:12px;align-items:flex-start}
+.steps div::before{counter-increment:s;content:counter(s);flex:none;width:30px;height:30px;border-radius:50%;background:var(--blueBg);color:var(--blue);font-weight:800;display:grid;place-items:center}
+.hide{display:none!important}
+.spin{width:18px;height:18px;border:3px solid #fff6;border-top-color:#fff;border-radius:50%;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.spin{animation:none}.prog i{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="3" width="22" height="26" rx="3" fill="#fff"/><path d="M8 10h14M8 15h14M8 20h9" stroke="#1f3a93" stroke-width="2"/><path d="M17 24l3 3 7-9" stroke="#d62f2f" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+  <h1>EduMate</h1><span class="hand">o'qituvchi yordamchisi</span>
+</header>
+<main>
+<section id="v-home">
+  <div class="hero">
+    <svg viewBox="0 0 640 300" role="img" aria-label="Qizil ruchka bilan tekshirilgan daftar varag'i">
+      <rect width="640" height="300" fill="#1f3a93"/>
+      <g transform="rotate(-3 320 150)">
+        <rect x="70" y="40" width="430" height="250" rx="6" fill="#0d1d55" opacity=".5" transform="translate(8 10)"/>
+        <rect x="70" y="40" width="430" height="250" rx="6" fill="#fff"/>
+        <g stroke="#cfd8ee" stroke-width="1.5"><path d="M70 90h430M70 125h430M70 160h430M70 195h430M70 230h430M70 265h430"/></g>
+        <path d="M120 40v250" stroke="#f2a0a0" stroke-width="2"/>
+        <g font-family="Caveat,cursive" font-size="26" fill="#1f3a93">
+          <text x="135" y="84">Kuz keldi. Barglar</text>
+          <text x="135" y="119">sargaydi va yerga</text>
+          <text x="135" y="154">to'kila boshladi.</text>
+          <text x="135" y="189">Qushlar uchib ketishdi</text>
+        </g>
+        <path d="M204 113q24 8 48 0" stroke="#d62f2f" stroke-width="3" fill="none"/>
+        <text x="214" y="104" font-family="Caveat,cursive" font-size="24" fill="#d62f2f">g'</text>
+        <path d="M413 182l5 5" stroke="#d62f2f" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="440" cy="245" r="30" fill="none" stroke="#d62f2f" stroke-width="4"/>
+        <text x="428" y="262" font-family="Caveat,cursive" font-size="48" font-weight="700" fill="#d62f2f">4</text>
+      </g>
+      <g transform="translate(520 60) rotate(35)"><rect width="16" height="170" rx="4" fill="#d62f2f"/><rect width="16" height="26" fill="#a11f1f"/><path d="M0 170l8 22 8-22z" fill="#f5d6b0"/><path d="M5 184l3 8 3-8z" fill="#d62f2f"/></g>
+    </svg>
+    <div>
+      <h2>Diktantni 30 soniyada tekshiring</h2>
+      <p class="mut" style="margin-top:-4px">Bir o'quvchi ishini qo'lda tekshirish taxminan 3 daqiqa oladi, 30 o'quvchiga 90 daqiqa ketadi. EduMate ishni rasmdan o'qiydi, xatolarni topadi va baho qo'yadi.</p>
+      <button class="pri" style="width:100%" data-go="check">Ishni tekshirish</button>
+    </div>
+  </div>
+  <div class="stats" style="margin-top:16px">
+    <div class="stat"><b id="sCount">0</b><span>tekshirilgan ish</span></div>
+    <div class="stat"><b id="sSaved">0</b><span>daqiqa tejaldi</span></div>
+    <div class="stat"><b id="sAvg">–</b><span>o'rtacha baho</span></div>
+  </div>
+  <div class="card">
+    <h3>Qanday ishlaydi</h3>
+    <div class="steps">
+      <div><span><b>Asl matnni kiriting.</b> <span class="mut">Diktant matnini bir marta yozib qo'yasiz.</span></span></div>
+      <div><span><b>Daftarlarni rasmga oling.</b> <span class="mut">Bir yo'la bir nechta rasm tanlash mumkin.</span></span></div>
+      <div><span><b>Natijani oling.</b> <span class="mut">Xatolar, to'g'ri yozilishi va baho. Kerak bo'lsa, xatoni o'zingiz o'chirasiz.</span></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="v-check" class="hide">
+  <h2>Ishni tekshirish</h2>
+  <div class="card">
+    <div class="seg" role="tablist"><button id="mDict" class="on">Diktant</button><button id="mFree">Yozma mashq</button></div>
+    <div id="dictBox">
+      <label for="taskSel">Diktant</label>
+      <select id="taskSel"></select>
+      <div id="newTask" class="hide">
+        <label for="tTitle">Nomi</label><input id="tTitle" placeholder="Masalan: Kuz faslida">
+        <label for="tClass">Sinf</label><input id="tClass" placeholder="5-A">
+        <label for="tText">Asl matn</label><textarea id="tText" placeholder="Diktant matnini shu yerga yozing"></textarea>
+        <div class="row" style="margin-top:10px"><button class="blue" id="tSave">Diktantni saqlash</button><button id="tSample">Namuna matn</button></div>
+      </div>
+    </div>
+    <div id="freeBox" class="hide">
+      <label for="fTask">Topshiriq (ixtiyoriy)</label>
+      <textarea id="fTask" placeholder="Masalan: 'Mening oilam' mavzusida 5-6 gap yozing"></textarea>
+    </div>
+  </div>
+  <div class="card">
+    <h3>O'quvchilar ishlari</h3>
+    <p class="mut" style="margin:0">Har bir rasm — bitta o'quvchining ishi. Ism varaqning tepasida yozilgan bo'lsa, o'zi o'qib oladi.</p>
+    <div class="row" style="margin-top:10px">
+      <label class="btn blue" style="margin:0">Rasmga olish<input id="camIn" type="file" accept="image/*" capture="environment" class="hide"></label>
+      <label class="btn" style="margin:0">Galereyadan<input id="galIn" type="file" accept="image/*" multiple class="hide"></label>
+    </div>
+    <button id="demoImg" style="width:100%;margin-top:10px">Namuna rasm qo'shish</button>
+    <div class="thumbs" id="thumbs"></div>
+    <div id="checkMsg"></div>
+    <div class="prog hide" id="prog"><i></i></div>
+    <button class="pri" id="runBtn" style="width:100%;margin-top:10px" disabled>Tekshirish</button>
+  </div>
+  <div id="results"></div>
+</section>
+
+<section id="v-journal" class="hide">
+  <h2>Jurnal</h2>
+  <div id="jList"></div>
+  <div class="row"><button id="csvBtn">Jadvalni nusxalash (CSV)</button></div>
+  <div id="jDetail"></div>
+</section>
+
+<section id="v-set" class="hide">
+  <h2>Sozlamalar</h2>
+  <div class="card">
+    <h3>Sun'iy intellekt</h3>
+    <p class="mut" style="margin-top:0">Rasmdagi qo'lyozmani o'qish uchun AI kerak. Veb-versiyada Claude o'zi ishlaydi; telefondagi ilovada API kalitini kiriting.</p>
+    <label for="prov">Xizmat</label>
+    <select id="prov"><option value="auto">Avtomatik</option><option value="gemini">Google Gemini (bepul kalit)</option><option value="claude">Anthropic Claude</option></select>
+    <label for="key">API kalit</label>
+    <input id="key" type="password" autocomplete="off" placeholder="Kalitni shu yerga qo'ying">
+    <p class="mut">Gemini kaliti: aistudio.google.com/apikey · Claude kaliti: console.anthropic.com. Kalit faqat shu qurilmada saqlanadi.</p>
+    <div id="aiStat" class="okmsg"></div>
+  </div>
+  <div class="card">
+    <h3>Baholash me'yori</h3>
+    <p class="mut" style="margin-top:0">Xatolar sonidan baho. Ikki ishora (tinish belgisi) xatosi bitta imlo xatosiga teng hisoblanadi.</p>
+    <div class="row">
+      <div><label for="g5">"5" — ko'pi bilan</label><input id="g5" type="number" min="0" inputmode="numeric"></div>
+      <div><label for="g4">"4" — ko'pi bilan</label><input id="g4" type="number" min="0" inputmode="numeric"></div>
+      <div><label for="g3">"3" — ko'pi bilan</label><input id="g3" type="number" min="0" inputmode="numeric"></div>
+    </div>
+    <p class="mut">Undan ko'p xato bo'lsa — "2".</p>
+  </div>
+  <div class="card"><button id="wipe" style="width:100%">Barcha ma'lumotlarni o'chirish</button><div id="wipeMsg"></div></div>
+</section>
+</main>
+
+<nav>
+  <button data-go="home" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1z"/></svg>Bosh sahifa</button>
+  <button data-go="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 6l2-3h4l2 3"/></svg>Tekshirish</button>
+  <button data-go="journal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3h12a2 2 0 012 2v16H7a2 2 0 01-2-2z"/><path d="M9 8h6M9 12h6"/></svg>Jurnal</button>
+  <button data-go="set"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>Sozlamalar</button>
+</nav>
+
+<script>
+{
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const SAMPLE_TEXT="Kuz keldi. Daraxtlarning barglari sarg'aydi va yerga to'kila boshladi. Qushlar issiq o'lkalarga uchib ketishdi. Dalalarda paxta terimi qizg'in davom etmoqda. Bolalar quvonch bilan maktabga shoshilishadi.";
+const SAMPLE_WRITTEN="Aliyev Jasur, 5-A\nKuz keldi. Daraxtlarning barglari sargaydi va yerga tokila boshladi. Qushlar issiq o'lkalarga uchib ketishdi Dalalarda paxta terimi qizgin davom etmoqda. Bolalar quvonch bilan maktabga shoshilishadi.";
+let mem={};
+const store={get(k,d){try{const v=localStorage.getItem('em_'+k);return v?JSON.parse(v):(mem[k]??d)}catch(e){return mem[k]??d}},set(k,v){mem[k]=v;try{localStorage.setItem('em_'+k,JSON.stringify(v))}catch(e){}}};
+let tasks=store.get('tasks',[]);
+let results=store.get('results',[]);
+let cfg=store.get('cfg',{prov:'auto',key:'',g5:0,g4:2,g3:5});
+if(!tasks.length){tasks=[{id:'t1',title:'Kuz faslida (namuna)',cls:'5-A',text:SAMPLE_TEXT}];store.set('tasks',tasks)}
+let mode='dict',queue=[],sample=null;
+
+/* ---------- navigation ---------- */
+const views=['home','check','journal','set'];
+function go(v){views.forEach(x=>$('#v-'+x).classList.toggle('hide',x!==v));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.go===v));if(v==='home')renderStats();if(v==='journal')renderJournal();if(v==='set')renderSet();scrollTo(0,0)}
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
+
+/* ---------- grading ---------- */
+function score(errs){let s=0,p=0;errs.forEach(e=>e.type==='ishora'?p++:s++);return s+Math.floor(p/2)}
+function grade(errs){const n=score(errs);return n<=cfg.g5?5:n<=cfg.g4?4:n<=cfg.g3?3:2}
+function renderStats(){$('#sCount').textContent=results.length;$('#sSaved').textContent=Math.round(results.length*2.5);$('#sAvg').textContent=results.length?(results.reduce((a,r)=>a+grade(r.errors),0)/results.length).toFixed(1):'–'}
+
+/* ---------- tasks ---------- */
+function renderTasks(sel){$('#taskSel').innerHTML=tasks.map(t=>`<option value="${esc(t.id)}">${esc(t.title)}${t.cls?' · '+esc(t.cls):''}</option>`).join('')+'<option value="new">+ Yangi diktant qo\'shish</option>';if(sel)$('#taskSel').value=sel;$('#newTask').classList.toggle('hide',$('#taskSel').value!=='new')}
+$('#taskSel').addEventListener('change',()=>$('#newTask').classList.toggle('hide',$('#taskSel').value!=='new'));
+$('#tSample').addEventListener('click',()=>{$('#tTitle').value='Kuz faslida';$('#tClass').value='5-A';$('#tText').value=SAMPLE_TEXT});
+$('#tSave').addEventListener('click',()=>{const text=$('#tText').value.trim(),title=$('#tTitle').value.trim()||'Diktant';if(!text){$('#tText').focus();return}const t={id:'t'+Date.now(),title,cls:$('#tClass').value.trim(),text};tasks.push(t);store.set('tasks',tasks);['#tTitle','#tClass','#tText'].forEach(s=>$(s).value='');renderTasks(t.id)});
+function setMode(m){mode=m;$('#mDict').classList.toggle('on',m==='dict');$('#mFree').classList.toggle('on',m==='free');$('#dictBox').classList.toggle('hide',m!=='dict');$('#freeBox').classList.toggle('hide',m!=='free')}
+$('#mDict').addEventListener('click',()=>setMode('dict'));$('#mFree').addEventListener('click',()=>setMode('free'));
+
+/* ---------- images ---------- */
+function shrink(file){return new Promise((res,rej)=>{const img=new Image();img.onload=()=>{const k=Math.min(1,1600/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(img.src);c.toBlob(b=>b?res(b):rej(new Error('rasm')),'image/jpeg',.85)};img.onerror=()=>rej(new Error('Rasmni ochib bo\'lmadi'));img.src=URL.createObjectURL(file)})}
+async function addFiles(fl){for(const f of fl){try{const b=await shrink(f);queue.push({blob:b,url:URL.createObjectURL(b)})}catch(e){msg('#checkMsg',e.message,1)}}renderQueue()}
+$('#camIn').addEventListener('change',e=>{addFiles(e.target.files);e.target.value=''});
+$('#galIn').addEventListener('change',e=>{addFiles(e.target.files);e.target.value=''});
+function renderQueue(){$('#thumbs').innerHTML=queue.map((q,i)=>`<div><img src="${q.url}" alt="Ish ${i+1}"><button data-rm="${i}" aria-label="O'chirish">×</button></div>`).join('');$('#runBtn').disabled=!queue.length;$('#runBtn').textContent=queue.length?`Tekshirish (${queue.length} ta ish)`:'Tekshirish'}
+$('#thumbs').addEventListener('click',e=>{const i=e.target.dataset.rm;if(i!==undefined){URL.revokeObjectURL(queue[i].url);queue.splice(+i,1);renderQueue()}});
+$('#demoImg').addEventListener('click',async()=>{try{await document.fonts.load('40px Caveat')}catch(e){}const c=document.createElement('canvas');c.width=1000;c.height=1250;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,1000,1250);x.strokeStyle='#c9d4ee';x.lineWidth=2;for(let y=150;y<1250;y+=62){x.beginPath();x.moveTo(0,y);x.lineTo(1000,y);x.stroke()}x.strokeStyle='#f0a0a0';x.beginPath();x.moveTo(110,0);x.lineTo(110,1250);x.stroke();x.fillStyle='#1d3a8f';x.font='46px Caveat, cursive';let y=138;SAMPLE_WRITTEN.split('\n').forEach(par=>{let line='';par.split(' ').forEach(w=>{const t=line?line+' '+w:w;if(x.measureText(t).width>840){x.fillText(line,135,y);y+=62;line=w}else line=t});x.fillText(line,135,y);y+=62});c.toBlob(b=>{queue.push({blob:b,url:URL.createObjectURL(b)});renderQueue();if(mode==='dict')renderTasks('t1')},'image/jpeg',.9)});
+
+/* ---------- AI ---------- */
+const toB64=b=>new Promise(r=>{const f=new FileReader();f.onload=()=>r(String(f.result).split(',')[1]);f.readAsDataURL(b)});
+function prompt(){
+ const common=`Sen o'zbek tili o'qituvchisining yordamchisisan. Rasmda o'quvchining qo'lda yozgan ishi bor.
+1) Matnni AYNAN o'quvchi yozganidek ko'chir: xatolarni TUZATMA, tinish belgilarini ham o'zgartirma. Agar varaq tepasida o'quvchining ismi yoki sinfi yozilgan bo'lsa, uni "name" ga yoz va "transcript" ga qo'shma.
+2) Xatolarni top. Har bir xato uchun: "written" — o'quvchi yozgani (transcript ichidagi aniq parcha; tushib qolgan so'z yoki belgi uchun undan oldingi so'z), "correct" — to'g'ri shakli, "type" — "imlo" (so'z xatosi, tutuq belgisi, bosh harf), "ishora" (tinish belgisi), "tushib qolgan" (so'z tushib qolgan) yoki "ortiqcha"; "why" — qisqa izoh o'zbek tilida.
+Qo'l yozuvi noaniq bo'lsa, o'quvchi foydasiga hisobla.`;
+ const task=mode==='dict'?`\nAsl diktant matni (to'g'risi shu):\n"""${curTask().text}"""\nO'quvchi matnini aynan shu asl matn bilan solishtir. Faqat asl matndan farqlarni xato deb hisobla.`:`\nBu yozma mashq. ${$('#fTask').value.trim()?'Topshiriq: "'+$('#fTask').value.trim()+'". ':''}O'zbek tili (lotin yozuvi) imlo va tinish belgilari qoidalari bo'yicha xatolarni top. Topshiriqqa mosligi haqida "comment" ga 1-2 gap yoz.`;
+ return common+task+`\nFaqat JSON qaytar, boshqa hech narsa yozma:\n{"name":"","transcript":"","errors":[{"written":"","correct":"","type":"imlo","why":""}],"comment":""}`}
+function parse(t){const m=String(t).match(/\{[\s\S]*\}/);if(!m)throw new Error('AI javobi tushunarsiz');const j=JSON.parse(m[0]);j.errors=Array.isArray(j.errors)?j.errors.filter(e=>e&&(e.written||e.correct)).map(e=>({written:String(e.written||''),correct:String(e.correct||''),type:String(e.type||'imlo'),why:String(e.why||'')})):[];return{name:String(j.name||''),transcript:String(j.transcript||''),errors:j.errors,comment:String(j.comment||'')}}
+function provider(){if(cfg.prov==='gemini'||cfg.prov==='claude')return cfg.key?cfg.prov:null;if(sample)return'sample';if(cfg.key)return cfg.key.startsWith('sk-ant')?'claude':'gemini';return null}
+async function ask(blob){
+ const p=provider(),text=prompt();
+ if(p==='sample'){const r=await sample(text,{images:[blob],modelTier:'complex',cache:false});return parse(r.text)}
+ const b64=await toB64(blob);
+ if(p==='gemini'){const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key='+encodeURIComponent(cfg.key),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({contents:[{parts:[{text},{inline_data:{mime_type:'image/jpeg',data:b64}}]}],generationConfig:{responseMimeType:'application/json',temperature:0}})});const j=await r.json();if(!r.ok)throw new Error(j.error?.message||('Gemini xatosi '+r.status));return parse(j.candidates?.[0]?.content?.parts?.map(x=>x.text).join('')||'')}
+ if(p==='claude'){const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':cfg.key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-5-5',max_tokens:4000,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:'image/jpeg',data:b64}},{type:'text',text}]}]})});const j=await r.json();if(!r.ok)throw new Error(j.error?.message||('Claude xatosi '+r.status));return parse(j.content?.map(x=>x.text||'').join('')||'')}
+ throw new Error("AI ulanmagan. Sozlamalar bo'limida API kalitini kiriting.")}
+const curTask=()=>tasks.find(t=>t.id===$('#taskSel').value);
+function msg(sel,t,bad){$(sel).innerHTML=t?`<div class="${bad?'note':'okmsg'}">${esc(t)}</div>`:''}
+
+$('#runBtn').addEventListener('click',async()=>{
+ if(mode==='dict'&&!curTask()){msg('#checkMsg','Avval diktantni tanlang yoki yangisini saqlang.',1);return}
+ if(!provider()){msg('#checkMsg',"AI ulanmagan. Sozlamalar bo'limida Gemini yoki Claude API kalitini kiriting.",1);return}
+ const btn=$('#runBtn'),items=queue.splice(0);renderQueue();btn.disabled=true;$('#prog').classList.remove('hide');msg('#checkMsg','');
+ const t0=Date.now();let done=0;$('#results').innerHTML='';
+ for(const q of items){btn.innerHTML=`<span class="spin"></span> ${done+1} / ${items.length} tekshirilmoqda`;
+  try{const r=await ask(q.blob);const rec={id:'r'+Date.now()+Math.random().toString(36).slice(2,6),date:new Date().toISOString(),mode,taskId:mode==='dict'?curTask().id:'',taskTitle:mode==='dict'?curTask().title:($('#fTask').value.trim()||'Yozma mashq'),name:r.name||`O'quvchi ${results.length+1}`,transcript:r.transcript,errors:r.errors,comment:r.comment};results.unshift(rec);store.set('results',results);$('#results').insertAdjacentHTML('beforeend',`<div id="c-${rec.id}"></div>`);renderCard(rec,'#c-'+rec.id)}
+  catch(e){$('#results').insertAdjacentHTML('beforeend',`<div class="note">Ish ${done+1}: ${esc(e.message||e)}</div>`);if(e.code==='rate_limited'||e.code==='not_granted')break}
+  URL.revokeObjectURL(q.url);done++;$('#prog i').style.width=(done/items.length*100)+'%'}
+ const sec=Math.round((Date.now()-t0)/1000);msg('#checkMsg',`${done} ta ish ${sec} soniyada tekshirildi. Qo'lda taxminan ${done*3} daqiqa ketardi.`);
+ btn.textContent='Tekshirish';$('#prog').classList.add('hide');$('#prog i').style.width='0';renderQueue()});
+
+/* ---------- result card ---------- */
+function marked(tr,errs){const spans=[];errs.forEach(e=>{if(!e.written)return;let i=-1,from=0;while((i=tr.indexOf(e.written,from))>-1){const j=i+e.written.length;if(!spans.some(s=>i<s[1]&&j>s[0])){spans.push([i,j]);break}from=i+1}});spans.sort((a,b)=>a[0]-b[0]);let o='',p=0;spans.forEach(([a,b])=>{o+=esc(tr.slice(p,a))+'<mark>'+esc(tr.slice(a,b))+'</mark>';p=b});return o+esc(tr.slice(p))}
+function renderCard(r,sel){const el=$(sel);if(!el)return;const g=grade(r.errors);
+ el.innerHTML=`<div class="card"><div class="res"><div><label for="nm-${r.id}" style="margin-top:0">O'quvchi</label><input id="nm-${r.id}" value="${esc(r.name)}"><p class="mut" style="margin:6px 0 0">${esc(r.taskTitle)} · ${r.errors.length} ta xato (${score(r.errors)} ball hisobida)</p></div><div class="grade" aria-label="Baho ${g}">${g}</div></div>
+ ${r.comment?`<div class="okmsg">${esc(r.comment)}</div>`:''}
+ <div style="margin-top:8px">${r.errors.length?r.errors.map((e,i)=>`<div class="err"><span class="w">${esc(e.written||'—')}</span><span aria-hidden="true">→</span><span class="c">${esc(e.correct||'—')}</span><span class="t">${esc(e.type)}</span><button class="x" data-del="${i}">Xato emas</button>${e.why?`<span class="why">${esc(e.why)}</span>`:''}</div>`).join(''):'<div class="okmsg">Xato topilmadi. Barakalla!</div>'}</div>
+ <details><summary>O'quvchi yozgan matn</summary><div class="tr">${marked(r.transcript,r.errors)}</div></details></div>`;
+ el.querySelector('input').addEventListener('change',e=>{r.name=e.target.value.trim()||r.name;store.set('results',results)});
+ el.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',()=>{r.errors.splice(+b.dataset.del,1);store.set('results',results);renderCard(r,sel)}))}
+
+/* ---------- journal ---------- */
+function renderJournal(){$('#jDetail').innerHTML='';if(!results.length){$('#jList').innerHTML='<div class="card mut">Hali tekshirilgan ish yo\'q. "Tekshirish" bo\'limidan boshlang.</div>';return}
+ const groups={};results.forEach(r=>(groups[r.taskTitle]??=[]).push(r));
+ $('#jList').innerHTML=Object.entries(groups).map(([t,rs])=>`<div class="card list"><h3>${esc(t)} <span class="mut">· ${rs.length} ta ish · o'rtacha ${(rs.reduce((a,r)=>a+grade(r.errors),0)/rs.length).toFixed(1)}</span></h3>${rs.map(r=>`<div class="it" data-open="${esc(r.id)}" tabindex="0"><span class="g">${grade(r.errors)}</span><span class="n">${esc(r.name)}<small>${r.errors.length} ta xato · ${new Date(r.date).toLocaleDateString('uz')}</small></span><button class="x" data-rmr="${esc(r.id)}" style="min-height:36px;font-size:13px">O'chirish</button></div>`).join('')}</div>`).join('')}
+$('#jList').addEventListener('click',e=>{const rm=e.target.closest('[data-rmr]');if(rm){results=results.filter(r=>r.id!==rm.dataset.rmr);store.set('results',results);renderJournal();return}const it=e.target.closest('[data-open]');if(it){const r=results.find(x=>x.id===it.dataset.open);$('#jDetail').innerHTML='<div id="jd"></div>';renderCard(r,'#jd');$('#jd').scrollIntoView({behavior:'smooth'})}});
+$('#jList').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.dataset.open)e.target.click()});
+$('#csvBtn').addEventListener('click',async()=>{const q=s=>'"'+String(s).replace(/"/g,'""')+'"';const csv=['Sana,O\'quvchi,Topshiriq,Xatolar,Baho',...results.map(r=>[new Date(r.date).toLocaleDateString('uz'),r.name,r.taskTitle,r.errors.length,grade(r.errors)].map(q).join(','))].join('\n');try{await navigator.clipboard.writeText(csv);$('#csvBtn').textContent='Nusxalandi — Excelga joylang'}catch(e){$('#jDetail').innerHTML=`<div class="card"><p class="mut">Nusxalab bo'lmadi, matnni qo'lda belgilang:</p><textarea>${esc(csv)}</textarea></div>`}setTimeout(()=>$('#csvBtn').textContent='Jadvalni nusxalash (CSV)',2500)});
+
+/* ---------- settings ---------- */
+function renderSet(){$('#prov').value=cfg.prov;$('#key').value=cfg.key;['g5','g4','g3'].forEach(k=>$('#'+k).value=cfg[k]);const p=provider();$('#aiStat').textContent=p==='sample'?'Ulangan: Claude (veb-versiya, kalit shart emas).':p==='gemini'?'Ulangan: Google Gemini.':p==='claude'?'Ulangan: Anthropic Claude.':'AI ulanmagan — API kalitini kiriting.'}
+function saveCfg(){cfg={prov:$('#prov').value,key:$('#key').value.trim(),g5:+$('#g5').value||0,g4:+$('#g4').value||0,g3:+$('#g3').value||0};store.set('cfg',cfg);renderSet()}
+['#prov','#key','#g5','#g4','#g3'].forEach(s=>$(s).addEventListener('change',saveCfg));
+let wipeArm=false;$('#wipe').addEventListener('click',()=>{if(!wipeArm){wipeArm=true;$('#wipe').textContent='Rostdan o\'chirilsinmi? Yana bosing';return}results=[];store.set('results',results);wipeArm=false;$('#wipe').textContent='Barcha ma\'lumotlarni o\'chirish';msg('#wipeMsg','Jurnal tozalandi.')});
+
+renderTasks('t1');renderStats();renderQueue();
+if(window.claude?.use)window.claude.use('sample').then(s=>{sample=s;if(!$('#v-set').classList.contains('hide'))renderSet()}).catch(()=>{});
+}
+</script>
+</body>
+</html>
