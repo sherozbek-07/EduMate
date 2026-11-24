@@ -75,6 +75,7 @@ nav button.on{color:var(--blue)}
 .steps div{display:flex;gap:12px;align-items:flex-start}
 .steps div::before{counter-increment:s;content:counter(s);flex:none;width:30px;height:30px;border-radius:50%;background:var(--blueBg);color:var(--blue);font-weight:800;display:grid;place-items:center}
 .hide{display:none!important}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;clip-path:inset(50%)}
 .spin{width:18px;height:18px;border:3px solid #fff6;border-top-color:#fff;border-radius:50%;animation:sp 1s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.spin{animation:none}.prog i{transition:none}}
@@ -157,8 +158,12 @@ header .hand{margin-left:0}
     <h3 data-t="worksTitle"></h3>
     <p class="mut" style="margin:0" data-t="worksHint"></p>
     <div class="row" style="margin-top:10px">
-      <label class="btn blue" style="margin:0"><span data-t="cam"></span><input id="camIn" type="file" accept="image/*" capture="environment" class="hide"></label>
-      <label class="btn" style="margin:0"><span data-t="gallery"></span><input id="galIn" type="file" accept="image/*" multiple class="hide"></label>
+      <button type="button" class="blue" id="camBtn" data-t="cam"></button>
+      <button type="button" id="galBtn" data-t="gallery"></button>
+    </div>
+    <div class="vh" aria-hidden="true">
+      <input id="camIn" type="file" accept="image/*" capture="environment" tabindex="-1">
+      <input id="galIn" type="file" accept="image/*" multiple tabindex="-1">
     </div>
     <button id="demoImg" style="width:100%;margin-top:10px" data-t="demoImg"></button>
     <div class="thumbs" id="thumbs"></div>
@@ -272,6 +277,10 @@ $('#mDict').addEventListener('click',()=>setMode('dict'));$('#mFree').addEventLi
 /* ---------- images ---------- */
 function shrink(file){return new Promise((res,rej)=>{const img=new Image();img.onload=()=>{const k=Math.min(1,1600/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(img.src);c.toBlob(b=>b?res(b):rej(new Error(t('badImg'))),'image/jpeg',.85)};img.onerror=()=>rej(new Error(t('badImg')));img.src=URL.createObjectURL(file)})}
 async function addFiles(fl){for(const f of fl){try{const b=await shrink(f);queue.push({blob:b,url:URL.createObjectURL(b)})}catch(e){msg('#checkMsg',e.message,1)}}renderQueue()}
+/* inside Claude (sandboxed frame) the camera hint can block the picker; the phone's picker still offers the camera */
+if(window.claude)$('#camIn').removeAttribute('capture');
+$('#camBtn').addEventListener('click',()=>{try{$('#camIn').click()}catch(e){$('#galIn').click()}});
+$('#galBtn').addEventListener('click',()=>$('#galIn').click());
 $('#camIn').addEventListener('change',e=>{addFiles(e.target.files);e.target.value=''});
 $('#galIn').addEventListener('change',e=>{addFiles(e.target.files);e.target.value=''});
 function renderQueue(){$('#thumbs').innerHTML=queue.map((q,i)=>`<div><img src="${q.url}" alt="${esc(t('work',i+1))}"><button data-rm="${i}" aria-label="${esc(t('del'))}">×</button></div>`).join('');$('#runBtn').disabled=!queue.length;$('#runBtn').textContent=queue.length?t('runN',queue.length):t('run')}
