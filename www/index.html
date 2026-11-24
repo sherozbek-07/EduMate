@@ -174,12 +174,7 @@ header .hand{margin-left:0}
       <input id="dCamIn" type="file" accept="image/*" capture="environment" tabindex="-1">
       <input id="dGalIn" type="file" accept="image/*" tabindex="-1">
     </div>
-    <div class="row" style="margin-top:10px"><button type="button" id="typeBtn" data-t="typeWork"></button><button type="button" id="demoImg" data-t="demoImg"></button></div>
-    <div id="typeBox" class="hide" style="border-top:1px dashed var(--line);margin-top:14px">
-      <label for="wName" data-t="student"></label><input id="wName" data-ph="phName">
-      <label for="wText" data-t="workText"></label><textarea id="wText" data-ph="phWork"></textarea>
-      <button type="button" class="blue" id="wAdd" style="width:100%;margin-top:10px" data-t="addWork"></button>
-    </div>
+    <button type="button" id="demoImg" style="width:100%;margin-top:10px" data-t="demoImg"></button>
     <div class="thumbs" id="thumbs"></div>
     <div id="checkMsg"></div>
     <div class="prog hide" id="prog"><i></i></div>
@@ -309,8 +304,6 @@ async function readOriginal(f){if(!f)return;if(!provider()){msg('#dMsg',t('needA
  catch(e){msg('#dMsg',e.message||t('badAI'),1)}bs.forEach(b=>b.disabled=false)}
 $('#dCamIn').addEventListener('change',e=>{readOriginal(e.target.files[0]);e.target.value=''});
 $('#dGalIn').addEventListener('change',e=>{readOriginal(e.target.files[0]);e.target.value=''});
-$('#typeBtn').addEventListener('click',()=>{$('#typeBox').classList.toggle('hide');if(!$('#typeBox').classList.contains('hide'))$('#wText').focus()});
-$('#wAdd').addEventListener('click',()=>{const x=$('#wText').value.trim();if(!x){$('#wText').focus();return}queue.push({text:x,name:$('#wName').value.trim()});$('#wText').value='';$('#wName').value='';renderQueue();$('#wName').focus()});
 $('#camIn').addEventListener('change',e=>{addFiles(e.target.files);e.target.value=''});
 $('#galIn').addEventListener('change',e=>{addFiles(e.target.files);e.target.value=''});
 function renderQueue(){$('#thumbs').innerHTML=queue.map((q,i)=>`<div>${q.text!=null?`<span class="txt"><b>Aa</b>${esc(q.name||t('txt'))}</span>`:`<img src="${q.url}" alt="${esc(t('work',i+1))}">`}<button data-rm="${i}" aria-label="${esc(t('del'))}">×</button></div>`).join('');$('#runBtn').disabled=!queue.length;$('#runBtn').textContent=queue.length?t('runN',queue.length):t('run')}
