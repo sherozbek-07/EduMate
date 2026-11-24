@@ -2,7 +2,7 @@
 <html lang="uz">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>EduMate</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
@@ -16,7 +16,7 @@
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Manrope,system-ui,sans-serif;overflow-x:clip;padding-bottom:84px}
-header{background:var(--blue);color:#fff;padding:16px max(4vw,16px) 18px;display:flex;align-items:center;gap:10px}
+header{background:var(--blue);color:#fff;padding:16px max(4vw,16px) 18px;padding-top:max(16px,env(safe-area-inset-top));display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:20;box-shadow:0 2px 10px #0b164033}
 header h1{margin:0;font-size:22px;font-weight:800;letter-spacing:-.01em}
 header .hand{font-family:Caveat,cursive;font-size:22px;opacity:.85;margin-left:auto}
 :root:not([data-theme=light]) header{background:light-dark(#1f3a93,#16234d)}
