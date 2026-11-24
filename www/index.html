@@ -392,10 +392,10 @@ function marked(tr,errs){const spans=[];errs.forEach(e=>{if(!e.written)return;le
 const cards=new Map();
 function renderCard(r,sel){const el=$(sel);if(!el)return;const g=grade(r.errors),full=cfg.detail!=='short';cards.set(sel,r);
  el.innerHTML=`<div class="card"><div class="res"><div><label for="nm-${r.id}" style="margin-top:0">${esc(t('student'))}</label><input id="nm-${r.id}" value="${esc(r.name)}"><p class="mut" style="margin:6px 0 0">${esc(r.taskTitle)} · ${esc(t('errInfo',r.errors.length,score(r.errors)))}</p></div><div class="grade" aria-label="${esc(t('gradeAria',g))}">${g}</div></div>
+ <div class="mk hide"><h3>${esc(t('marked'))}</h3><img alt="${esc(t('marked'))}"><div class="row"><button type="button" class="blue sv">${esc(t('saveImg'))}</button></div><div class="svm"></div></div>
  <div class="seg sm"><button type="button" class="${full?'':'on'}" data-dt="short">${esc(t('short'))}</button><button type="button" class="${full?'on':''}" data-dt="full">${esc(t('full'))}</button></div>
  ${full&&r.comment?`<div class="okmsg">${esc(r.comment)}</div>`:''}
  <div style="margin-top:8px">${r.errors.length?r.errors.map((e,i)=>`<div class="err${full?'':' sh'}"><div class="eb"><span class="w">${esc(e.written||'—')}</span><span aria-hidden="true">→</span><span class="c">${esc(e.correct||'—')}</span>${full?`<span class="t">${esc(typeName(e.type))}</span>`:''}${full&&e.why?`<span class="why">${esc(e.why)}</span>`:''}</div><button class="x" data-del="${i}" title="${esc(t('notError'))}" aria-label="${esc(t('notError'))}">✕</button></div>`).join(''):`<div class="okmsg">${esc(t('noErrors'))}</div>`}</div>
- <div class="mk hide"><h3>${esc(t('marked'))}</h3><img alt="${esc(t('marked'))}"><div class="row"><button type="button" class="blue sv">${esc(t('saveImg'))}</button></div><div class="svm"></div></div>
  <details><summary>${esc(t('written'))}</summary><div class="tr">${marked(r.transcript,r.errors)}</div></details></div>`;
  el.querySelector('input').addEventListener('change',e=>{r.name=e.target.value.trim()||r.name;store.set('results',results)});
  el.querySelectorAll('[data-dt]').forEach(b=>b.addEventListener('click',()=>{cfg.detail=b.dataset.dt;store.set('cfg',cfg);for(const[k,v]of cards){if($(k))renderCard(v,k);else cards.delete(k)}}));
