@@ -1,5 +1,7 @@
 # EduMate — o'qituvchi yordamchisi
 
+**Sayt:** https://sherozbek-07.github.io/EduMate/ · **Ilova:** https://sherozbek-07.github.io/EduMate/app/
+
 O'qituvchi diktant yoki yozma ishni telefonda rasmga oladi. EduMate rasmdagi qo'lyozmani sun'iy intellekt yordamida o'qiydi, asl matn bilan solishtiradi, xatolarni ko'rsatadi va baho qo'yadi. Bitta ishni qo'lda tekshirish taxminan 3 daqiqa oladi, EduMate bilan esa taxminan 30 soniya.
 
 ## Imkoniyatlar
@@ -31,4 +33,4 @@ npx cap open android
 Android Studio'da: **Build → Build APK(s)**.
 
 ## Kodni o'zgartirish
-Butun ilova bitta faylda: `www/index.html`. O'zgartirgandan keyin `npx cap sync android`.
+Ilova bitta faylda: `www/index.html`. Sayt (bosh sahifa): `site/index.html`. `main` ga push qilinganda sayt avtomatik yangilanadi. O'zgartirgandan keyin `npx cap sync android`.
