@@ -2,6 +2,7 @@
 <html lang="uz">
 <head>
 <meta charset="utf-8">
+<meta name="theme-color" content="#1f3a93">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>EduMate</title>
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyZDUwYzgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxNjI4NmIiLz48L2xpbmVhckdyYWRpZW50Pgo8cmFkaWFsR3JhZGllbnQgaWQ9Imdsb3ciIGN4PSIuMjgiIGN5PSIuMiIgcj0iLjciPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIuMjIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvcmFkaWFsR3JhZGllbnQ+CjxmaWx0ZXIgaWQ9InNoIiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIj48ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iOCIgc3RkRGV2aWF0aW9uPSI4IiBmbG9vZC1jb2xvcj0iIzBiMTY0MCIgZmxvb2Qtb3BhY2l0eT0iLjM1Ii8+PC9maWx0ZXI+PC9kZWZzPjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEyIiBmaWxsPSJ1cmwoI2cpIi8+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSIxMTIiIGZpbGw9InVybCgjZ2xvdykiLz48ZyBmaWx0ZXI9InVybCgjc2gpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iNDYiPgo8cGF0aCBkPSJNMjA2IDE2OEgxMTJ2MTc2aDk0TTExMiAyNTZoNzYiIHN0cm9rZT0iI2ZmZiIvPjxwYXRoIGQ9Ik0yNjYgMzQ0VjE2OCIgc3Ryb2tlPSIjZmZmIi8+PHBhdGggZD0iTTQyMCAxNTB2MTk0IiBzdHJva2U9IiNmZmYiLz4KPHBhdGggZD0iTTI4NCAyMDRsNTAgODIgODYtMTM2IiBzdHJva2U9IiNmZjRkNGQiLz48L2c+PGNpcmNsZSBjeD0iNDIwIiBjeT0iMTUwIiByPSIwIi8+PC9zdmc+">
@@ -126,9 +127,28 @@ nav button.on{color:var(--blue)}
 #lang,#stLang{appearance:none;-webkit-appearance:none;width:auto!important;min-width:0;min-height:32px!important;padding:4px 10px!important;font:800 13px/1 Manrope,system-ui,sans-serif!important;letter-spacing:.04em;text-align:center;text-align-last:center;border-radius:999px!important;background:#ffffff1f!important;border:1px solid #ffffff4d!important;color:#fff!important;cursor:pointer}
 #lang option,#stLang option{color:#141a2e;font-weight:600}
 
-/* compact language pill + glass header */
-#lang,#stLang{-webkit-appearance:none;appearance:none;width:auto!important;min-height:30px!important;height:30px;padding:0 12px!important;border-radius:999px!important;font:800 13px/30px Manrope,system-ui,sans-serif!important;letter-spacing:.04em;text-align:center;background:#ffffff1a!important;border:1px solid #ffffff40!important;color:#fff!important;cursor:pointer}
-#lang:hover,#stLang:hover{background:#ffffff2e!important}
+/* language bubble + theme toggle */
+#lang,#stLang{-webkit-appearance:none;appearance:none;width:auto!important;min-height:30px!important;height:30px;padding:0 11px!important;border:0!important;border-radius:13px 13px 13px 4px!important;font:800 13px/30px Manrope,system-ui,sans-serif!important;letter-spacing:.04em;text-align:center;background:#fff!important;color:#1f3a93!important;cursor:pointer;box-shadow:0 2px 8px #0b164033;transition:transform .15s}
+#lang:active,#stLang:active{transform:scale(.94)}
+#thBtn{width:36px;height:36px;min-height:0;padding:0;border:0;background:none;display:grid;place-items:center;border-radius:50%;cursor:pointer;flex:none}
+#thBtn:focus-visible{outline:2px solid #ffd34d}
+.sm{width:23px;height:23px;overflow:visible;transition:transform .55s cubic-bezier(.5,1.6,.5,1)}
+.sm .core{fill:#ffd34d;transition:r .5s cubic-bezier(.5,1.6,.5,1),fill .4s}
+.sm .rays{stroke:#ffd34d;stroke-width:2;stroke-linecap:round;transform-origin:12px 12px;transition:transform .45s cubic-bezier(.5,1.6,.5,1),opacity .3s}
+.sm .mc{transition:cx .5s cubic-bezier(.5,1.4,.5,1),cy .5s cubic-bezier(.5,1.4,.5,1)}
+/* light "iliq" theme */
+:root.lt{color-scheme:light;--bg:#fdf9f2;--card:#fff;--ink:#22304f;--mut:#7a7363;--line:#efe6d6;--blueBg:#fff0d6;--redBg:#fdecec}
+.lt body{transition:background-color .4s}
+.lt header{background:rgba(255,251,244,.88)!important;box-shadow:0 1px 0 #efe6d6,0 6px 18px #7a736314!important}
+.lt header .emw{color:#22304f}.lt header .emw b{color:#e23b3b}
+.lt header .hand{color:#7a7363}
+.lt #lang{background:#2f55d4!important;color:#fff!important;box-shadow:0 2px 8px #2f55d433}
+.lt .sm{transform:rotate(360deg)}.lt .sm .core{r:9px;fill:#2f3f7a}.lt .sm .rays{transform:scale(.3) rotate(90deg);opacity:0}.lt .sm .mc{cx:17px;cy:8px}
+.lt #v-home .hero svg>rect:first-child{fill:#fff0d6}.lt #v-home .hero svg>g:first-of-type>rect:first-child{fill:#c9a873;opacity:.25}
+.lt .stat b{color:#2f55d4}
+.lt nav{background:#fffdf9}
+.lt #meBtn{border-color:#efe6d6}
+@media(prefers-reduced-motion:reduce){.sm,.sm *{transition:none!important}}
 header{background:rgba(23,42,110,.66)!important;-webkit-backdrop-filter:blur(16px) saturate(1.5);backdrop-filter:blur(16px) saturate(1.5);box-shadow:0 1px 0 #ffffff22,0 6px 18px #0b164022!important}
 :root[data-theme=dark] header{background:rgba(22,35,77,.62)!important}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]) header{background:rgba(22,35,77,.62)!important}}
@@ -177,6 +197,7 @@ if(seen)sp.remove();else{sp.addEventListener('click',hide);setTimeout(hide,match
   <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyZDUwYzgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxNjI4NmIiLz48L2xpbmVhckdyYWRpZW50Pgo8cmFkaWFsR3JhZGllbnQgaWQ9Imdsb3ciIGN4PSIuMjgiIGN5PSIuMiIgcj0iLjciPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIuMjIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvcmFkaWFsR3JhZGllbnQ+CjxmaWx0ZXIgaWQ9InNoIiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIj48ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iOCIgc3RkRGV2aWF0aW9uPSI4IiBmbG9vZC1jb2xvcj0iIzBiMTY0MCIgZmxvb2Qtb3BhY2l0eT0iLjM1Ii8+PC9maWx0ZXI+PC9kZWZzPjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEyIiBmaWxsPSJ1cmwoI2cpIi8+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSIxMTIiIGZpbGw9InVybCgjZ2xvdykiLz48ZyBmaWx0ZXI9InVybCgjc2gpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iNDYiPgo8cGF0aCBkPSJNMjA2IDE2OEgxMTJ2MTc2aDk0TTExMiAyNTZoNzYiIHN0cm9rZT0iI2ZmZiIvPjxwYXRoIGQ9Ik0yNjYgMzQ0VjE2OCIgc3Ryb2tlPSIjZmZmIi8+PHBhdGggZD0iTTQyMCAxNTB2MTk0IiBzdHJva2U9IiNmZmYiLz4KPHBhdGggZD0iTTI4NCAyMDRsNTAgODIgODYtMTM2IiBzdHJva2U9IiNmZjRkNGQiLz48L2c+PGNpcmNsZSBjeD0iNDIwIiBjeT0iMTUwIiByPSIwIi8+PC9zdmc+" width="32" height="32" alt="" style="border-radius:8px;box-shadow:0 0 0 2px #ffffff33">
   <h1 class="emw" style="font-size:25px;margin-right:auto"><a id="siteLink" style="color:inherit;text-decoration:none">Edu<b>Mate</b></a></h1><span class="hand" data-t="tagline"></span>
   <button type="button" id="meBtn" class="ava hide" aria-label="Profil"></button>
+  <button type="button" id="thBtn" aria-label="Mavzu"><svg class="sm" viewBox="0 0 24 24" aria-hidden="true"><mask id="thM"><rect width="24" height="24" fill="#fff"/><circle class="mc" cx="24" cy="4" r="7" fill="#000"/></mask><circle class="core" cx="12" cy="12" r="5" mask="url(#thM)"/><g class="rays"><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></g></svg></button>
   <select id="lang" aria-label="Til / Язык / Language"><option value="uz">UZ</option><option value="ru">RU</option><option value="en">EN</option><option value="tg">TJ</option></select>
 </header>
 <main>
@@ -615,6 +636,10 @@ $('#stGo').addEventListener('click',()=>$('#v-start').classList.add('open'));
 document.querySelectorAll('[data-role-pick]').forEach(b=>b.addEventListener('click',()=>{ROLE=b.dataset.rolePick;try{localStorage.setItem('em_role',ROLE)}catch(e){}
  $('#v-start').classList.add('hide');document.querySelector('nav').classList.remove('hide');stuCard();go('home')}));
 $('#chRole').addEventListener('click',showStart);
+/* ---------- theme: blue <-> light ---------- */
+function applyTheme(){const lt=cfg.theme==='light';document.documentElement.classList.toggle('lt',lt);$('#thBtn').setAttribute('aria-pressed',String(lt));const m=document.querySelector('meta[name=theme-color]');if(m)m.content=lt?'#fdf9f2':'#1f3a93'}
+$('#thBtn').addEventListener('click',()=>{cfg.theme=cfg.theme==='light'?'blue':'light';store.set('cfg',cfg);applyTheme()});
+applyTheme();
 applyLang();
 if(AUTH_ON)fbInit();else showStart();
 if(/\/app\/?(index\.html)?$/.test(location.pathname)&&location.protocol.startsWith('http'))$('#siteLink').href='../';
