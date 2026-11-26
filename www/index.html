@@ -122,6 +122,9 @@ nav button.on{color:var(--blue)}
 .spin{width:18px;height:18px;border:3px solid #fff6;border-top-color:#fff;border-radius:50%;animation:sp 1s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.spin{animation:none}.prog i{transition:none}}
+
+#lang,#stLang{appearance:none;-webkit-appearance:none;width:auto!important;min-width:0;min-height:32px!important;padding:4px 10px!important;font:800 13px/1 Manrope,system-ui,sans-serif!important;letter-spacing:.04em;text-align:center;text-align-last:center;border-radius:999px!important;background:#ffffff1f!important;border:1px solid #ffffff4d!important;color:#fff!important;cursor:pointer}
+#lang option,#stLang option{color:#141a2e;font-weight:600}
 </style>
 <style>
 header #lang{width:auto;margin-left:8px;background:#ffffff1f;color:#fff;border:1px solid #ffffff55;min-height:40px;padding:6px 10px;font-weight:700;font-size:15px}
@@ -152,7 +155,7 @@ if(seen)sp.remove();else{sp.addEventListener('click',hide);setTimeout(hide,match
 </script>
 
 <section id="v-start" class="hide" aria-label="EduMate">
-  <select id="stLang" aria-label="Til / Язык / Language" style="position:absolute;top:max(16px,env(safe-area-inset-top));right:16px;width:auto;font:700 14px Manrope,system-ui,sans-serif;background:#ffffff1f;color:#fff;border:1px solid #ffffff55;border-radius:10px;padding:6px 10px;min-height:38px"><option value="uz">O'zbek</option><option value="ru">Русский</option><option value="en">English</option><option value="tg">Тоҷикӣ</option></select>
+  <select id="stLang" aria-label="Til / Язык / Language" style="position:absolute;top:max(16px,env(safe-area-inset-top));right:16px;width:auto;font:700 14px Manrope,system-ui,sans-serif;background:#ffffff1f;color:#fff;border:1px solid #ffffff55;border-radius:10px;padding:6px 10px;min-height:38px"><option value="uz">UZ</option><option value="ru">RU</option><option value="en">EN</option><option value="tg">TJ</option></select>
   <img class="slogo" id="stLogo" alt="">
   <div class="emw swm">Edu<b>Mate</b></div>
   <button type="button" id="stGo" data-t="start"></button>
@@ -167,7 +170,7 @@ if(seen)sp.remove();else{sp.addEventListener('click',hide);setTimeout(hide,match
   <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyZDUwYzgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxNjI4NmIiLz48L2xpbmVhckdyYWRpZW50Pgo8cmFkaWFsR3JhZGllbnQgaWQ9Imdsb3ciIGN4PSIuMjgiIGN5PSIuMiIgcj0iLjciPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIuMjIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvcmFkaWFsR3JhZGllbnQ+CjxmaWx0ZXIgaWQ9InNoIiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIj48ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iOCIgc3RkRGV2aWF0aW9uPSI4IiBmbG9vZC1jb2xvcj0iIzBiMTY0MCIgZmxvb2Qtb3BhY2l0eT0iLjM1Ii8+PC9maWx0ZXI+PC9kZWZzPjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEyIiBmaWxsPSJ1cmwoI2cpIi8+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSIxMTIiIGZpbGw9InVybCgjZ2xvdykiLz48ZyBmaWx0ZXI9InVybCgjc2gpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iNDYiPgo8cGF0aCBkPSJNMjA2IDE2OEgxMTJ2MTc2aDk0TTExMiAyNTZoNzYiIHN0cm9rZT0iI2ZmZiIvPjxwYXRoIGQ9Ik0yNjYgMzQ0VjE2OCIgc3Ryb2tlPSIjZmZmIi8+PHBhdGggZD0iTTQyMCAxNTB2MTk0IiBzdHJva2U9IiNmZmYiLz4KPHBhdGggZD0iTTI4NCAyMDRsNTAgODIgODYtMTM2IiBzdHJva2U9IiNmZjRkNGQiLz48L2c+PGNpcmNsZSBjeD0iNDIwIiBjeT0iMTUwIiByPSIwIi8+PC9zdmc+" width="32" height="32" alt="" style="border-radius:8px;box-shadow:0 0 0 2px #ffffff33">
   <h1 class="emw" style="font-size:25px;margin-right:auto"><a id="siteLink" style="color:inherit;text-decoration:none">Edu<b>Mate</b></a></h1><span class="hand" data-t="tagline"></span>
   <button type="button" id="meBtn" class="ava hide" aria-label="Profil"></button>
-  <select id="lang" aria-label="Til / Язык / Language"><option value="uz">O'zbek</option><option value="ru">Русский</option><option value="en">English</option><option value="tg">Тоҷикӣ</option></select>
+  <select id="lang" aria-label="Til / Язык / Language"><option value="uz">UZ</option><option value="ru">RU</option><option value="en">EN</option><option value="tg">TJ</option></select>
 </header>
 <main>
 <section id="v-home">

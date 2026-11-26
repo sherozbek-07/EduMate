@@ -91,6 +91,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
 @media(max-width:900px){.hero .wrap,.start{grid-template-columns:1fr}.nums{grid-template-columns:repeat(2,minmax(0,1fr))}.steps,.feats{grid-template-columns:1fr 1fr}.links{display:none}#lang{margin-left:auto}}
 @media(max-width:600px){.steps,.feats{grid-template-columns:1fr}.bar{grid-template-columns:7em minmax(0,1fr)}nav .btn.small{display:none}}
 @media(prefers-reduced-motion:no-preference){.pen{animation:pen 3.5s ease-in-out infinite}@keyframes pen{50%{transform:translate(-4px,6px)}}}
+
+#lang,#stLang{appearance:none;-webkit-appearance:none;width:auto!important;min-width:0;min-height:32px!important;padding:4px 10px!important;font:800 13px/1 Manrope,system-ui,sans-serif!important;letter-spacing:.04em;text-align:center;text-align-last:center;border-radius:999px!important;background:#ffffff1f!important;border:1px solid #ffffff4d!important;color:#fff!important;cursor:pointer}
+#lang option,#stLang option{color:#141a2e;font-weight:600}
 </style>
 </head>
 <body>
@@ -117,7 +120,7 @@ if(seen)sp.remove();else{sp.addEventListener('click',hide);setTimeout(hide,match
   <div class="wrap">
     <a class="logo" href="#top"><img src="logo.svg" width="36" height="36" alt="" style="border-radius:9px;box-shadow:0 0 0 2px #ffffff33"><span class="emw" style="font-size:24px">Edu<b>Mate</b></span></a>
     <div class="links"><a href="#how" data-t="navHow"></a><a href="#features" data-t="navFeat"></a><a href="#start" data-t="navStart"></a><a href="#author" data-t="navAuthor"></a></div>
-    <select id="lang" aria-label="Til / Язык / Language"><option value="uz">O'zbek</option><option value="ru">Русский</option><option value="en">English</option><option value="tg">Тоҷикӣ</option></select>
+    <select id="lang" aria-label="Til / Язык / Language"><option value="uz">UZ</option><option value="ru">RU</option><option value="en">EN</option><option value="tg">TJ</option></select>
     <a class="btn red small" href="app/" data-t="open"></a>
   </div>
 </nav>
