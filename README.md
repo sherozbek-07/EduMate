@@ -1,6 +1,6 @@
 # EduMate — o'qituvchi yordamchisi
 
-**Sayt:** https://sherozbek-07.github.io/EduMate/ · **Ilova:** https://sherozbek-07.github.io/EduMate/app/
+**Sayt:** https://sherozbek-07.github.io/EduMate/ · **Ilova:** https://sherozbek-07.github.io/EduMate/app/ · **APK:** https://github.com/sherozbek-07/EduMate/releases/latest/download/EduMate.apk
 
 O'qituvchi diktant yoki yozma ishni telefonda rasmga oladi. EduMate rasmdagi qo'lyozmani sun'iy intellekt yordamida o'qiydi, asl matn bilan solishtiradi, xatolarni ko'rsatadi va baho qo'yadi. Bitta ishni qo'lda tekshirish taxminan 3 daqiqa oladi, EduMate bilan esa taxminan 30 soniya.
 

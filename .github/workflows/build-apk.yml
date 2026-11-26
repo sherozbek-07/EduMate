@@ -5,6 +5,9 @@ on:
     branches: [main, master]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,3 +34,13 @@ jobs:
         with:
           name: EduMate-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
+      - name: APK nomini o'zgartirish
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk EduMate.apk
+      - name: Yuklab olish sahifasiga joylash (Releases)
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: EduMate (eng so'nggi versiya)
+          body: "Telefonga o'rnatish uchun EduMate.apk faylini yuklab oling."
+          files: EduMate.apk
+          make_latest: true
