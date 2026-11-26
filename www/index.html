@@ -136,18 +136,34 @@ nav button.on{color:var(--blue)}
 .sm .core{fill:#ffd34d;transition:r .5s cubic-bezier(.5,1.6,.5,1),fill .4s}
 .sm .rays{stroke:#ffd34d;stroke-width:2;stroke-linecap:round;transform-origin:12px 12px;transition:transform .45s cubic-bezier(.5,1.6,.5,1),opacity .3s}
 .sm .mc{transition:cx .5s cubic-bezier(.5,1.4,.5,1),cy .5s cubic-bezier(.5,1.4,.5,1)}
-/* light "iliq" theme */
-:root.lt{color-scheme:light;--bg:#fdf9f2;--card:#fff;--ink:#22304f;--mut:#7a7363;--line:#efe6d6;--blueBg:#fff0d6;--redBg:#fdecec}
+/* custom language picker (bubbles) */
+#lang,#stLang{display:none!important}
+.lwrap{position:relative;flex:none}
+#v-start .lwrap{position:absolute;top:max(16px,env(safe-area-inset-top));right:16px;z-index:3}
+.lbtn{min-height:30px;height:30px;padding:0 11px;border:0;border-radius:13px 13px 13px 4px;font:800 13px/30px Manrope,system-ui,sans-serif;letter-spacing:.04em;background:#fff;color:#1f3a93;box-shadow:0 2px 8px #0b164033;transition:transform .15s;cursor:pointer}
+.lbtn:active{transform:scale(.92)}
+.ldrop{position:absolute;top:calc(100% + 10px);right:0;display:flex;flex-direction:column;align-items:flex-end;gap:7px;pointer-events:none;z-index:80}
+.lop{display:flex;align-items:center;gap:9px;border:0;background:#fff;color:#141a2e;border-radius:16px 4px 16px 16px;padding:7px 12px 7px 8px;min-height:44px;box-shadow:0 6px 18px #0b164040;opacity:0;transform:translateY(-14px) scale(.6);transform-origin:top right;transition:transform .35s cubic-bezier(.3,1.6,.5,1) var(--d),opacity .2s var(--d);white-space:nowrap;cursor:pointer}
+.lop .fl{width:26px;height:26px;border-radius:50%;flex:none;box-shadow:0 0 0 2px #fff,0 0 0 3px #e6ebf5}
+.lop span{display:flex;flex-direction:column;align-items:flex-start;line-height:1.1}.lop b{font-size:14px}.lop small{font-size:10px;color:#5c6480;font-weight:700;letter-spacing:.04em}
+.lop .ck{font-style:normal;color:#22a06b;font-weight:900;margin-left:4px;opacity:0}
+.lop.sel{background:#eaf0ff}.lop.sel .ck{opacity:1}
+.lop:focus-visible{outline:3px solid #ffd34d}
+.lwrap.open .ldrop{pointer-events:auto}.lwrap.open .lop{opacity:1;transform:none}
+.lt header .lbtn{background:#2f55d4;color:#fff;box-shadow:0 2px 8px #2f55d433}
+@media(prefers-reduced-motion:reduce){.lop{transition:none}}
+/* light theme */
+:root.lt{color-scheme:light;--bg:#ffffff;--card:#f6f8fc;--ink:#141a2e;--mut:#5c6480;--line:#e6ebf5;--blueBg:#eaf0ff;--redBg:#fdecec}
 .lt body{transition:background-color .4s}
-.lt header{background:rgba(255,251,244,.88)!important;box-shadow:0 1px 0 #efe6d6,0 6px 18px #7a736314!important}
-.lt header .emw{color:#22304f}.lt header .emw b{color:#e23b3b}
-.lt header .hand{color:#7a7363}
+.lt header{background:rgba(255,255,255,.86)!important;box-shadow:0 1px 0 #e6ebf5,0 6px 18px #1f3a9310!important}
+.lt header .emw{color:#141a2e}.lt header .emw b{color:#e23b3b}
+.lt header .hand{color:#5c6480}
 .lt #lang{background:#2f55d4!important;color:#fff!important;box-shadow:0 2px 8px #2f55d433}
 .lt .sm{transform:rotate(360deg)}.lt .sm .core{r:9px;fill:#2f3f7a}.lt .sm .rays{transform:scale(.3) rotate(90deg);opacity:0}.lt .sm .mc{cx:17px;cy:8px}
-.lt #v-home .hero svg>rect:first-child{fill:#fff0d6}.lt #v-home .hero svg>g:first-of-type>rect:first-child{fill:#c9a873;opacity:.25}
+.lt #v-home .hero svg>rect:first-child{fill:#eaf0ff}.lt #v-home .hero svg>g:first-of-type>rect:first-child{fill:#9fb0e0;opacity:.35}
 .lt .stat b{color:#2f55d4}
-.lt nav{background:#fffdf9}
-.lt #meBtn{border-color:#efe6d6}
+.lt nav{background:#ffffff}
+.lt #meBtn{border-color:#e6ebf5}
 @media(prefers-reduced-motion:reduce){.sm,.sm *{transition:none!important}}
 header{background:rgba(23,42,110,.66)!important;-webkit-backdrop-filter:blur(16px) saturate(1.5);backdrop-filter:blur(16px) saturate(1.5);box-shadow:0 1px 0 #ffffff22,0 6px 18px #0b164022!important}
 :root[data-theme=dark] header{background:rgba(22,35,77,.62)!important}
@@ -636,8 +652,30 @@ $('#stGo').addEventListener('click',()=>$('#v-start').classList.add('open'));
 document.querySelectorAll('[data-role-pick]').forEach(b=>b.addEventListener('click',()=>{ROLE=b.dataset.rolePick;try{localStorage.setItem('em_role',ROLE)}catch(e){}
  $('#v-start').classList.add('hide');document.querySelector('nav').classList.remove('hide');stuCard();go('home')}));
 $('#chRole').addEventListener('click',showStart);
+/* ---------- custom language picker ---------- */
+const FLAG={uz:'<rect width="30" height="10" fill="#0099b5"/><rect y="10" width="30" height="10" fill="#fff"/><rect y="20" width="30" height="10" fill="#1eb53a"/><rect y="9.4" width="30" height="1.2" fill="#ce1126"/><rect y="19.4" width="30" height="1.2" fill="#ce1126"/><circle cx="7" cy="5" r="2.6" fill="#fff"/><circle cx="8.2" cy="5" r="2.4" fill="#0099b5"/>',
+ ru:'<rect width="30" height="10" fill="#fff"/><rect y="10" width="30" height="10" fill="#0039a6"/><rect y="20" width="30" height="10" fill="#d52b1e"/>',
+ en:'<rect width="30" height="30" fill="#012169"/><path d="M0 0L30 30M30 0L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0L30 30M30 0L0 30" stroke="#C8102E" stroke-width="2"/><path d="M15 0v30M0 15h30" stroke="#fff" stroke-width="8"/><path d="M15 0v30M0 15h30" stroke="#C8102E" stroke-width="4"/>',
+ tg:'<rect width="30" height="9" fill="#cc0000"/><rect y="9" width="30" height="12" fill="#fff"/><rect y="21" width="30" height="9" fill="#006600"/><path d="M12 16.5h6l-.6-2.2-1.2 1-1.2-1.8-1.2 1.8-1.2-1z" fill="#f8c300"/>'};
+const LNAMES=[['uz','UZ',"O'zbekcha"],['ru','RU','Русский'],['en','EN','English'],['tg','TJ','Тоҷикӣ']];
+const flagSvg=(c,id)=>`<svg class="fl" viewBox="0 0 30 30" aria-hidden="true"><clipPath id="${id}"><circle cx="15" cy="15" r="15"/></clipPath><g clip-path="url(#${id})">${FLAG[c]}</g></svg>`;
+const pickers=[];
+function makePicker(sel,pfx){
+ const w=document.createElement('div');w.className='lwrap';
+ w.innerHTML=`<button type="button" class="lbtn" aria-haspopup="true" aria-expanded="false" aria-label="Til / Язык / Language"></button><div class="ldrop" role="menu">${LNAMES.map(([c,k,n],j)=>`<button type="button" class="lop" role="menuitemradio" data-l="${c}" style="--d:${j*55}ms" tabindex="-1">${flagSvg(c,pfx+c)}<span><b>${n}</b><small>${k}</small></span><i class="ck">✓</i></button>`).join('')}</div>`;
+ sel.after(w);const btn=w.querySelector('.lbtn');
+ const close=()=>{w.classList.remove('open');btn.setAttribute('aria-expanded','false')};
+ btn.addEventListener('click',e=>{e.stopPropagation();const o=!w.classList.contains('open');pickers.forEach(p=>p.close());if(o){w.classList.add('open');btn.setAttribute('aria-expanded','true');const s=w.querySelector('.lop.sel')||w.querySelector('.lop');setTimeout(()=>s.focus({preventScroll:true}),60)}});
+ w.querySelectorAll('.lop').forEach(o=>o.addEventListener('click',e=>{e.stopPropagation();close();if(cfg.lang!==o.dataset.l){$('#lang').value=o.dataset.l;$('#lang').dispatchEvent(new Event('change'))}btn.focus({preventScroll:true})}));
+ const p={close,paint(){const cur=LNAMES.find(x=>x[0]===cfg.lang)||LNAMES[0];btn.textContent=cur[1];w.querySelectorAll('.lop').forEach(o=>{const on=o.dataset.l===cfg.lang;o.classList.toggle('sel',on);o.setAttribute('aria-checked',String(on))})}};
+ pickers.push(p);p.paint();return p}
+makePicker($('#lang'),'hf');makePicker($('#stLang'),'sf');
+document.addEventListener('click',()=>pickers.forEach(p=>p.close()));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')pickers.forEach(p=>p.close())});
+$('#lang').addEventListener('change',()=>pickers.forEach(p=>p.paint()));
+
 /* ---------- theme: blue <-> light ---------- */
-function applyTheme(){const lt=cfg.theme==='light';document.documentElement.classList.toggle('lt',lt);$('#thBtn').setAttribute('aria-pressed',String(lt));const m=document.querySelector('meta[name=theme-color]');if(m)m.content=lt?'#fdf9f2':'#1f3a93'}
+function applyTheme(){const lt=cfg.theme==='light';document.documentElement.classList.toggle('lt',lt);$('#thBtn').setAttribute('aria-pressed',String(lt));const m=document.querySelector('meta[name=theme-color]');if(m)m.content=lt?'#ffffff':'#1f3a93'}
 $('#thBtn').addEventListener('click',()=>{cfg.theme=cfg.theme==='light'?'blue':'light';store.set('cfg',cfg);applyTheme()});
 applyTheme();
 applyLang();
