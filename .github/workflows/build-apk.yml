@@ -17,7 +17,6 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
-      - uses: android-actions/setup-android@v3
       - name: Paketlarni o'rnatish
         run: npm ci
       - name: Veb fayllarni Android'ga ko'chirish
