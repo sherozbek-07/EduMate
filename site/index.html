@@ -92,6 +92,25 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
 </style>
 </head>
 <body>
+<div id="sp" aria-hidden="true"><svg viewBox="60 110 420 290"><path class="sp-s sp-w sp-e" pathLength="1" d="M206 168H112v176h94M112 256h76"/><path class="sp-s sp-w sp-m1" pathLength="1" d="M266 344V168"/><path class="sp-s sp-w sp-m2" pathLength="1" d="M420 150v194"/><path class="sp-s sp-r" pathLength="1" d="M284 204l50 82 86-136"/></svg><div class="sp-n">Edu<b>Mate</b></div></div>
+<style>
+#sp{position:fixed;inset:0;z-index:9999;background:radial-gradient(120% 80% at 28% 15%,#3a5fd6 0%,#2343b4 35%,#16286b 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .45s ease,visibility .45s;cursor:pointer}
+#sp.sp-out{opacity:0;visibility:hidden}
+#sp svg{width:min(46vw,240px);height:auto;overflow:visible}
+.sp-s{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:46;stroke-dasharray:1;stroke-dashoffset:1}
+.sp-w{stroke:#fff}.sp-r{stroke:#ff4d4d}
+.sp-e{animation:spDraw .6s .15s ease-out forwards}.sp-m1{animation:spDraw .35s .6s ease-out forwards}.sp-m2{animation:spDraw .35s .75s ease-out forwards}.sp-r{animation:spDraw .45s 1.05s cubic-bezier(.6,0,.3,1) forwards}
+.sp-n{font:800 clamp(28px,7vw,40px)/1 Manrope,system-ui,sans-serif;color:#fff;letter-spacing:-.01em;opacity:0;transform:translateY(10px);animation:spUp .5s 1.5s forwards}
+.sp-n b{color:#ff6b6b}
+@keyframes spDraw{to{stroke-dashoffset:0}}@keyframes spUp{to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.sp-s,.sp-n{animation-duration:.01s!important;animation-delay:0s!important}}
+</style>
+<script>
+{const sp=document.getElementById('sp');let seen=false;try{seen=sessionStorage.getItem('em_sp')==='1';sessionStorage.setItem('em_sp','1')}catch(e){}
+const hide=()=>{sp.classList.add('sp-out');setTimeout(()=>sp.remove(),500)};
+if(seen)sp.remove();else{sp.addEventListener('click',hide);setTimeout(hide,matchMedia('(prefers-reduced-motion:reduce)').matches?600:2600)}}
+</script>
+
 <nav>
   <div class="wrap">
     <a class="logo" href="#top"><img src="logo.svg" width="36" height="36" alt="" style="border-radius:9px;box-shadow:0 0 0 2px #ffffff33">EduMate</a>

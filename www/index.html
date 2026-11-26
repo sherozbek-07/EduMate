@@ -96,6 +96,25 @@ header .hand{margin-left:0}
 </style>
 </head>
 <body>
+<div id="sp" aria-hidden="true"><svg viewBox="60 110 420 290"><path class="sp-s sp-w sp-e" pathLength="1" d="M206 168H112v176h94M112 256h76"/><path class="sp-s sp-w sp-m1" pathLength="1" d="M266 344V168"/><path class="sp-s sp-w sp-m2" pathLength="1" d="M420 150v194"/><path class="sp-s sp-r" pathLength="1" d="M284 204l50 82 86-136"/></svg><div class="sp-n">Edu<b>Mate</b></div></div>
+<style>
+#sp{position:fixed;inset:0;z-index:9999;background:radial-gradient(120% 80% at 28% 15%,#3a5fd6 0%,#2343b4 35%,#16286b 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .45s ease,visibility .45s;cursor:pointer}
+#sp.sp-out{opacity:0;visibility:hidden}
+#sp svg{width:min(46vw,240px);height:auto;overflow:visible}
+.sp-s{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:46;stroke-dasharray:1;stroke-dashoffset:1}
+.sp-w{stroke:#fff}.sp-r{stroke:#ff4d4d}
+.sp-e{animation:spDraw .6s .15s ease-out forwards}.sp-m1{animation:spDraw .35s .6s ease-out forwards}.sp-m2{animation:spDraw .35s .75s ease-out forwards}.sp-r{animation:spDraw .45s 1.05s cubic-bezier(.6,0,.3,1) forwards}
+.sp-n{font:800 clamp(28px,7vw,40px)/1 Manrope,system-ui,sans-serif;color:#fff;letter-spacing:-.01em;opacity:0;transform:translateY(10px);animation:spUp .5s 1.5s forwards}
+.sp-n b{color:#ff6b6b}
+@keyframes spDraw{to{stroke-dashoffset:0}}@keyframes spUp{to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.sp-s,.sp-n{animation-duration:.01s!important;animation-delay:0s!important}}
+</style>
+<script>
+{const sp=document.getElementById('sp');let seen=false;try{seen=sessionStorage.getItem('em_sp')==='1';sessionStorage.setItem('em_sp','1')}catch(e){}
+const hide=()=>{sp.classList.add('sp-out');setTimeout(()=>sp.remove(),500)};
+if(seen)sp.remove();else{sp.addEventListener('click',hide);setTimeout(hide,matchMedia('(prefers-reduced-motion:reduce)').matches?600:2600)}}
+</script>
+
 <header>
   <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyZDUwYzgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxNjI4NmIiLz48L2xpbmVhckdyYWRpZW50Pgo8cmFkaWFsR3JhZGllbnQgaWQ9Imdsb3ciIGN4PSIuMjgiIGN5PSIuMiIgcj0iLjciPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIuMjIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvcmFkaWFsR3JhZGllbnQ+CjxmaWx0ZXIgaWQ9InNoIiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIj48ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iOCIgc3RkRGV2aWF0aW9uPSI4IiBmbG9vZC1jb2xvcj0iIzBiMTY0MCIgZmxvb2Qtb3BhY2l0eT0iLjM1Ii8+PC9maWx0ZXI+PC9kZWZzPjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEyIiBmaWxsPSJ1cmwoI2cpIi8+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSIxMTIiIGZpbGw9InVybCgjZ2xvdykiLz48ZyBmaWx0ZXI9InVybCgjc2gpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iNDYiPgo8cGF0aCBkPSJNMjA2IDE2OEgxMTJ2MTc2aDk0TTExMiAyNTZoNzYiIHN0cm9rZT0iI2ZmZiIvPjxwYXRoIGQ9Ik0yNjYgMzQ0VjE2OCIgc3Ryb2tlPSIjZmZmIi8+PHBhdGggZD0iTTQyMCAxNTB2MTk0IiBzdHJva2U9IiNmZmYiLz4KPHBhdGggZD0iTTI4NCAyMDRsNTAgODIgODYtMTM2IiBzdHJva2U9IiNmZjRkNGQiLz48L2c+PGNpcmNsZSBjeD0iNDIwIiBjeT0iMTUwIiByPSIwIi8+PC9zdmc+" width="32" height="32" alt="" style="border-radius:8px;box-shadow:0 0 0 2px #ffffff33">
   <h1><a id="siteLink" style="color:inherit;text-decoration:none">EduMate</a></h1><span class="hand" data-t="tagline"></span>
