@@ -136,15 +136,16 @@ nav button.on{color:var(--blue)}
 .sm .core{fill:#ffd34d;transition:r .5s cubic-bezier(.5,1.6,.5,1),fill .4s}
 .sm .rays{stroke:#ffd34d;stroke-width:2;stroke-linecap:round;transform-origin:12px 12px;transition:transform .45s cubic-bezier(.5,1.6,.5,1),opacity .3s}
 .sm .mc{transition:cx .5s cubic-bezier(.5,1.4,.5,1),cy .5s cubic-bezier(.5,1.4,.5,1)}
-/* bottom nav: glass like header, filled active icon + red dot */
-nav{background:rgba(23,42,110,.66)!important;-webkit-backdrop-filter:blur(16px) saturate(1.5);backdrop-filter:blur(16px) saturate(1.5);border-top:0!important;box-shadow:0 -1px 0 #ffffff22,0 -6px 18px #0b164022;color-scheme:light}
-nav button{color:#b9c4ea!important;gap:3px!important;font-weight:700!important;background:none!important}
-nav button .ni{width:25px!important;height:25px!important;transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+/* bottom nav: floating light-blue capsule, icons only, active in a circle */
+nav{left:14px!important;right:14px!important;bottom:calc(14px + env(safe-area-inset-bottom))!important;max-width:520px;margin:0 auto;background:#eaf0ff!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border:0!important;border-radius:28px;padding:8px 10px!important;display:flex!important;justify-content:space-between;align-items:center;box-shadow:0 12px 28px #1f3a9326,inset 0 0 0 1px #d6e0fb!important;color-scheme:light}
+nav button{position:relative;flex:none!important;width:50px;min-height:50px!important;padding:0!important;border-radius:50%!important;display:grid!important;place-items:center;color:#6b7bb3!important;background:none!important;transition:background-color .3s,color .3s,box-shadow .3s}
+nav button span{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+nav button .ni{width:24px!important;height:24px!important;grid-area:1/1}
 nav button .f{display:none}nav button.on .o{display:none}nav button.on .f{display:block}
-nav button.on{color:#fff!important}nav button.on .ni{transform:translateY(-1px) scale(1.06)}
-.ndot{width:5px;height:5px;border-radius:50%;background:transparent;transition:background .2s}nav button.on .ndot{background:#ff5a5a}
-.lt nav{background:rgba(255,255,255,.86)!important;box-shadow:0 -1px 0 #e6ebf5,0 -6px 18px #1f3a930d}
-.lt nav button{color:#8891ad!important}.lt nav button.on{color:#1f3a93!important}
+nav button.on{background:#1f3a93!important;color:#fff!important;box-shadow:0 0 0 4px #1f3a9322}
+.ndot{position:absolute;bottom:6px;left:50%;margin-left:-2.5px;width:5px;height:5px;border-radius:50%;background:transparent}nav button.on .ndot{background:#ff5a5a}
+body{padding-bottom:100px!important}
+@media(prefers-color-scheme:dark){:root:not(.lt) nav{background:#1a2550!important;box-shadow:0 12px 28px #00000080,inset 0 1px 0 #ffffff12!important}:root:not(.lt) nav button{color:#9aa8d6!important}:root:not(.lt) nav button.on{background:#8aa5ff!important;color:#0e1220!important;box-shadow:0 0 0 4px #8aa5ff33}}
 /* role sheet: gradient cards */
 #v-start::after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:#ff5a5a;filter:blur(80px);opacity:.33;right:-80px;top:40%;pointer-events:none}
 #v-start .sheet{left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));max-width:520px;background:#fff;color:#141a2e;color-scheme:light;border-radius:28px;padding:20px 16px 16px;gap:14px;transform:translateY(120%);box-shadow:0 24px 48px #0b164055;z-index:2}
@@ -186,7 +187,7 @@ nav button.on{color:#fff!important}nav button.on .ni{transform:translateY(-1px) 
 .lt .sm{transform:rotate(360deg)}.lt .sm .core{r:9px;fill:#2f3f7a}.lt .sm .rays{transform:scale(.3) rotate(90deg);opacity:0}.lt .sm .mc{cx:17px;cy:8px}
 .lt #v-home .hero svg>rect:first-child{fill:#eaf0ff}.lt #v-home .hero svg>g:first-of-type>rect:first-child{fill:#9fb0e0;opacity:.35}
 .lt .stat b{color:#2f55d4}
-.lt nav{background:#ffffff}
+
 .lt #meBtn{border-color:#e6ebf5}
 @media(prefers-reduced-motion:reduce){.sm,.sm *{transition:none!important}}
 header{background:rgba(23,42,110,.66)!important;-webkit-backdrop-filter:blur(16px) saturate(1.5);backdrop-filter:blur(16px) saturate(1.5);box-shadow:0 1px 0 #ffffff22,0 6px 18px #0b164022!important}
