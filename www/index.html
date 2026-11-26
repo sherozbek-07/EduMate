@@ -245,6 +245,13 @@ header{background:rgba(23,42,110,.66)!important;-webkit-backdrop-filter:blur(16p
 .chint{font-size:13px;margin:10px 2px 0}.glink{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:44px;margin-top:6px;border:0;background:none;box-shadow:none;color:var(--blue);font-weight:700}.glink svg{width:20px;height:20px}
 .runbar{position:sticky;bottom:calc(84px + env(safe-area-inset-bottom));z-index:5;margin:12px -4px 0;padding:10px 4px 6px;background:linear-gradient(transparent,var(--bg) 30%)}
 #runBtn{width:100%;min-height:56px;border-radius:18px;font-size:17px;font-weight:800}#runBtn:disabled{background:var(--card);color:var(--mut);border:1px solid var(--line);box-shadow:none;opacity:1}#runBtn:not(:disabled){background:linear-gradient(135deg,#ff5a52,#d92f2f);box-shadow:0 12px 26px #e0453a44}
+
+*{-webkit-tap-highlight-color:transparent}
+button,a,[role=button],.chip,.hcd,.tadd{-webkit-user-select:none;user-select:none;touch-action:manipulation}
+button{transition:transform .12s ease,filter .12s ease}
+button:active:not(:disabled){transform:scale(.97);filter:brightness(.94)}
+nav button:active{transform:none;filter:none}
+button:focus:not(:focus-visible){outline:none}
 </style>
 <style>
 header #lang{width:auto;margin-left:8px;background:#ffffff1f;color:#fff;border:1px solid #ffffff55;min-height:40px;padding:6px 10px;font-weight:700;font-size:15px}
