@@ -512,7 +512,7 @@ function saveCfg(){setTimeout(renderBanner);Object.assign(cfg,{prov:$('#prov').v
 let wipeArm=false;$('#wipe').addEventListener('click',()=>{if(!wipeArm){wipeArm=true;$('#wipe').textContent=t('wipeConfirm');return}results.forEach(r=>delImg(r.id));results=[];store.set('results',results);wipeArm=false;$('#wipe').textContent=t('wipe');msg('#wipeMsg',t('wiped'))});
 
 /* ---------- accounts (Firebase) ---------- */
-const FB_CONFIG=null; /*FB_CONFIG*/
+const FB_CONFIG={apiKey:"AIzaSyCpJkc8H0v6rGHFmLGMVTHiU94PPsiNImU",authDomain:"edumate-b0015.firebaseapp.com",projectId:"edumate-b0015",storageBucket:"edumate-b0015.firebasestorage.app",messagingSenderId:"1040611335187",appId:"1:1040611335187:web:2533a15c2b3515c64af3e6"};
 const AUTH_ON=!!FB_CONFIG&&(location.hostname==='localhost'||location.hostname.endsWith('github.io'));
 const NATIVE=!!window.Capacitor?.isNativePlatform?.();
 let fb=null,me=null,prof=null,pfRole='',pfAvatar='',signUp=false;
