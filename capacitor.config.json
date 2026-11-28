@@ -2,5 +2,9 @@
   "appId": "uz.edumate.app",
   "appName": "EduMate",
   "webDir": "www",
-  "plugins": { "CapacitorHttp": { "enabled": true } }
+  "plugins": {
+    "CapacitorHttp": {
+      "enabled": false
+    }
+  }
 }
