@@ -130,7 +130,7 @@ nav button.on{color:var(--blue)}
 /* language bubble + theme toggle */
 #lang,#stLang{-webkit-appearance:none;appearance:none;width:auto!important;min-height:30px!important;height:30px;padding:0 11px!important;border:0!important;border-radius:13px 13px 13px 4px!important;font:800 13px/30px Manrope,system-ui,sans-serif!important;letter-spacing:.04em;text-align:center;background:#fff!important;color:#1f3a93!important;cursor:pointer;box-shadow:0 2px 8px #0b164033;transition:transform .15s}
 #lang:active,#stLang:active{transform:scale(.94)}
-#thBtn{width:36px;height:36px;min-height:0;padding:0;border:0;background:none;display:grid;place-items:center;border-radius:50%;cursor:pointer;flex:none}
+#thBtn{width:auto;height:auto;min-height:0;padding:0;border:0;background:none;display:block;border-radius:22px;cursor:pointer;flex:none;box-shadow:none}#thBtn:active{transform:scale(.95)}
 #thBtn:focus-visible{outline:2px solid #ffd34d}
 svg.sm{width:23px;height:23px;overflow:visible;transition:transform .55s cubic-bezier(.5,1.6,.5,1)}
 svg.sm .core{fill:#ffd34d;transition:r .5s cubic-bezier(.5,1.6,.5,1),fill .4s}
@@ -306,6 +306,12 @@ button:focus:not(:focus-visible){outline:none}
 .jct.g .jth{display:flex;justify-content:space-between;align-items:flex-start;gap:6px}.jct.g .jcn{color:#fff;min-width:0}.jab{flex:none;background:#ffffff2e;border-radius:12px;padding:5px 9px;font-weight:800;font-size:15px}
 .jct.g small{color:#ffffffcc}.jct.g em{color:#ffffffb3;position:relative;z-index:1}.jct.g .gbar{background:#ffffff30;position:relative;z-index:1}.jct.g.e .jcn{opacity:1}
 .jemp{display:block;margin:14px 0 4px;font-size:12px;font-weight:700;color:#ffffffa8}
+.tpill{position:relative;display:flex;align-items:center;width:72px;height:38px;padding:3px;border-radius:19px;background:#ffffff1f;border:1px solid #ffffff33}
+.tpill i{position:relative;z-index:1;flex:1;height:32px;display:grid;place-items:center;transition:color .35s}.tpill svg{width:18px;height:18px}
+.tpill .ts{color:#f0a020}.tpill .tm{color:#ffffff90}
+.tk{position:absolute;top:3px;left:3px;width:32px;height:32px;border-radius:50%;background:#fff;box-shadow:0 2px 6px #0003;transition:transform .4s cubic-bezier(.5,1.5,.5,1)}
+.lt .tpill{background:#eef1fa;border-color:#e0e5f2}.lt .tk{transform:translateX(34px)}.lt .tpill .ts{color:#8a93b0}.lt .tpill .tm{color:#3d5fe0}
+@media(prefers-reduced-motion:reduce){.tk,.tpill i{transition:none}}
 </style>
 <style>
 header #lang{width:auto;margin-left:8px;background:#ffffff1f;color:#fff;border:1px solid #ffffff55;min-height:40px;padding:6px 10px;font-weight:700;font-size:15px}
@@ -359,7 +365,7 @@ if(seen)sp.remove();else{spTink();sp.addEventListener('click',hide);setTimeout(h
   <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyZDUwYzgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxNjI4NmIiLz48L2xpbmVhckdyYWRpZW50Pgo8cmFkaWFsR3JhZGllbnQgaWQ9Imdsb3ciIGN4PSIuMjgiIGN5PSIuMiIgcj0iLjciPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIuMjIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvcmFkaWFsR3JhZGllbnQ+CjxmaWx0ZXIgaWQ9InNoIiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAlIj48ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iOCIgc3RkRGV2aWF0aW9uPSI4IiBmbG9vZC1jb2xvcj0iIzBiMTY0MCIgZmxvb2Qtb3BhY2l0eT0iLjM1Ii8+PC9maWx0ZXI+PC9kZWZzPjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEyIiBmaWxsPSJ1cmwoI2cpIi8+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSIxMTIiIGZpbGw9InVybCgjZ2xvdykiLz48ZyBmaWx0ZXI9InVybCgjc2gpIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iNDYiPgo8cGF0aCBkPSJNMjA2IDE2OEgxMTJ2MTc2aDk0TTExMiAyNTZoNzYiIHN0cm9rZT0iI2ZmZiIvPjxwYXRoIGQ9Ik0yNjYgMzQ0VjE2OCIgc3Ryb2tlPSIjZmZmIi8+PHBhdGggZD0iTTQyMCAxNTB2MTk0IiBzdHJva2U9IiNmZmYiLz4KPHBhdGggZD0iTTI4NCAyMDRsNTAgODIgODYtMTM2IiBzdHJva2U9IiNmZjRkNGQiLz48L2c+PGNpcmNsZSBjeD0iNDIwIiBjeT0iMTUwIiByPSIwIi8+PC9zdmc+" width="32" height="32" alt="" style="border-radius:8px;box-shadow:0 0 0 2px #ffffff33">
   <h1 class="emw" style="font-size:25px;margin-right:auto"><a id="siteLink" style="color:inherit;text-decoration:none">Edu<b>Mate</b></a></h1><span class="hand" data-t="tagline"></span>
   <button type="button" id="meBtn" class="ava hide" aria-label="Profil"></button>
-  <button type="button" id="thBtn" aria-label="Mavzu"><svg class="sm" viewBox="0 0 24 24" aria-hidden="true"><mask id="thM"><rect width="24" height="24" fill="#fff"/><circle class="mc" cx="24" cy="4" r="7" fill="#000"/></mask><circle class="core" cx="12" cy="12" r="5" mask="url(#thM)"/><g class="rays"><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></g></svg></button>
+  <button type="button" id="thBtn" aria-label="Mavzu"><span class="tpill" aria-hidden="true"><span class="tk"></span><i class="ts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></i><i class="tm"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></i></span></button>
   <select id="lang" aria-label="Til / Язык / Language"><option value="uz">UZ</option><option value="ru">RU</option><option value="en">EN</option><option value="tg">TJ</option></select>
 </header>
 <main>
